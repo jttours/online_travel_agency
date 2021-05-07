@@ -1,0 +1,23 @@
+{
+    "name": "online_travel_agency",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node ota-server/index.js",
+        "server": "nodemon ota-server/index.js",
+        "client": "npm start --prefix ota-client",
+        "dev": "concurrently \"npm run server\" \"npm run client\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "concurrently": "^6.0.2",
+        "cors": "^2.8.5",
+        "dotenv": "^9.0.0",
+        "express": "^4.17.1",
+        "mysql": "^2.18.1",
+        "nodemon": "^2.0.7"
+    }
+}
