@@ -1,20 +1,41 @@
 require('dotenv').config();
 const express = require('express');
-
+const cors = require('cors');
+const mysql = require('mysql');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6789;
+const SECRET_KEY = process.env.SECRET_KEY;
 
-//data base details
+app.use(cors());
+app.use(express.json());
 
-const connection = mysql.createConnection({
-    host: process.env.host,
-    user: process.env.username,
-    password: process.env.password,
-    database: process.env.database
-  });
+app.use(express.static('./client'));
 
 
+// attributes / middlewares
+const quriesAttributes = require('./attributes/query.attribute');
+
+
+
+
+
+// controllers
+const authCtrl = require('./controllers/auth.ctrl');
+const userCtrl = require('./controllers/user.ctrl');
+
+
+
+
+app.use('/auth', authCtrl);
+
+const middlewares = [
+  quriesAttributes.fieldsQuery
+];
+
+app.use('/register', ...middlewares, authCtrl);
 
 
 
