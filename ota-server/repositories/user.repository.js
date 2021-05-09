@@ -24,11 +24,15 @@ function add(objModel, callback) {
              })
        } else return callback('username already exists');
     })
- 
- 
  }
+
+ function getLoginCredentials(email, pass, callback) {
+   db.performSelect('SELECT * FROM `ota_users` WHERE `ota_user_username` = ? AND `ota_user_password` = ?', [username, md5(pass)], function (err, res) {
+      callback(err, res.length == 1 ? res[0] : null);
+   });
+}
  
 //  module.exports.getById = getById;
 //  module.exports.getOwned = getOwned;
-//  module.exports.getByLogin = getByLogin;
+module.exports.getLoginCredentials = getLoginCredentials;
  module.exports.add = add;

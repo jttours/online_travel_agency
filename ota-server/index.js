@@ -16,26 +16,32 @@ app.use(express.static('./client'));
 
 
 // attributes / middlewares
+//const userCredentials = require('./attributes/user-credentials.attr');
 const quriesAttributes = require('./attributes/query.attribute');
+//const authorizationAttribute = require('./attributes/authorization.attr');
 
 
 
 
 
 // controllers
-const authCtrl = require('./controllers/auth.ctrl');
-const userCtrl = require('./controllers/user.ctrl');
+const registerAuthCtrl = require('./controllers/register.auth.ctrl');
+// const loginAuthCtrl = require('./controllers/login.auth.ctrl');
+// const userCtrl = require('./controllers/user.ctrl');
 
 
+//app.use('/auth', userCredentials, authCtrl);
 
-
-app.use('/auth', authCtrl);
+app.use('/registerAuth', registerAuthCtrl);
+// app.use('/loginAuth', userCredentials, loginAuthCtrl);
 
 const middlewares = [
   quriesAttributes.fieldsQuery
 ];
 
-app.use('/register', ...middlewares, authCtrl);
+app.use('/register', ...middlewares, registerAuthCtrl);
+// app.use('/login', ...middlewares, loginAuthCtrl);
+
 
 
 
