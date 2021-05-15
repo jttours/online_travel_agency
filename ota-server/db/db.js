@@ -15,7 +15,6 @@ connection.connect(function (err) {
 
 function performSelect(query, values, callback) {
     connection.query(query, values, function (err, results) {
-       console.log('the results rom the select query - ',results);
        callback(err, results);
     });
  }

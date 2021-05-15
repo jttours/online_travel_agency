@@ -1,12 +1,12 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+//require('dotenv').config();
 
 const userRepository = require('./../repositories/user.repository');
 
 const router = express.Router();
 
 router.post('/', function (req, res) {
-    console.log ('the login request is - ',req);
    const { ota_user_username, ota_user_password } = req.body;
    userRepository.getLoginCredentials(ota_user_username, ota_user_password, function (err, userVerified) {
       if (userVerified) {

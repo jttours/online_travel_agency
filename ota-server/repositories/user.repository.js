@@ -17,7 +17,7 @@ function usernameAlreadyExists(username, callback) {
 function add(objModel, callback) {
     usernameAlreadyExists(objModel.username, function (err, res) {
        if (!res) {
-          console.log('I am proceeding with the insert');
+          console.log('I am proceeding with the insert - ', objModel);
           db.performInsert("INSERT INTO `ota_users` (`ota_user_first_name`, `ota_user_last_name`, `ota_user_username`, `ota_user_password`) VALUES (?, ?, ?, ?)",
              [objModel.first_name, objModel.last_name, objModel.username, md5(objModel.password)], function (err, res) {
                 callback(err, res);
@@ -26,8 +26,8 @@ function add(objModel, callback) {
     })
  }
 
- function getLoginCredentials(email, pass, callback) {
-   db.performSelect('SELECT * FROM `ota_users` WHERE `ota_user_username` = ? AND `ota_user_password` = ?', [username, md5(pass)], function (err, res) {
+ function getLoginCredentials(username, password, callback) {
+   db.performSelect('SELECT * FROM `ota_users` WHERE `ota_user_username` = ? AND `ota_user_password` = ?', [username, md5(password)], function (err, res) {
       callback(err, res.length == 1 ? res[0] : null);
    });
 }

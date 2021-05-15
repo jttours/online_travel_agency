@@ -8,12 +8,13 @@ const router = express.Router();
 
 
 router.post('/', function (req, res) {
-  const { ota_user_first_name, ota_user_last_name, ota_user_username, ota_user_password } = req.body;
+  console.log('the post request -',req.body);
+  const { firstName, lastName, userName, userPassword } = req.body.user;
   userRepository.add({
-    first_name: ota_user_first_name,
-    last_name: ota_user_last_name,
-    username: ota_user_username,
-    password: ota_user_password
+    first_name: firstName,
+    last_name: lastName,
+    username: userName,
+    password: userPassword
   }, function (err, success) {
      if (err || !success) {
         return res.status(400).send(err)
