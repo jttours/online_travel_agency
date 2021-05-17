@@ -6,7 +6,7 @@ import './index.css';
 import store from '../src/redux/store'
 import reportWebVitals from './reportWebVitals';
 import Routes from "./components/Routes";
-console.log(store);
+
 ReactDOM.render(
   <Provider store ={store}>
   <Routes />

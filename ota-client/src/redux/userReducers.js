@@ -1,4 +1,4 @@
-import * as actions from './acttionTypes';
+import * as actions from './actionTypes';
 
 
 const users = [];
@@ -11,7 +11,16 @@ switch (action.type) {
             {
                  ...action.payload
             }
-        ]
+        ];
+        case actions.USER_LOGGEDIN:
+            return [
+                ...state,
+                {
+                   username:action.payload.userName,
+                   password:action.payload.userPassword
+                }
+                
+            ]
         default:
             return state;
 }

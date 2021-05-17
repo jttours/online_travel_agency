@@ -27,6 +27,7 @@ function add(objModel, callback) {
  }
 
  function getLoginCredentials(username, password, callback) {
+   console.log('I am proceeding with the login - ', username,password);
    db.performSelect('SELECT * FROM `ota_users` WHERE `ota_user_username` = ? AND `ota_user_password` = ?', [username, md5(password)], function (err, res) {
       callback(err, res.length == 1 ? res[0] : null);
    });

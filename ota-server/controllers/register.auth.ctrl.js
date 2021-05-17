@@ -8,7 +8,7 @@ const router = express.Router();
 
 
 router.post('/', function (req, res) {
-  console.log('the post request -',req.body);
+  //console.log('the post request -',req.body);
   const { firstName, lastName, userName, userPassword } = req.body.user;
   userRepository.add({
     first_name: firstName,

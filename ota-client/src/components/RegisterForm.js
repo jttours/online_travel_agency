@@ -23,6 +23,7 @@ function RegisterForm(props) {
       <Form size='large' onSubmit={(event) => {
                 event.preventDefault();
                 register(userState, history);
+                history.push("/");
               }}>
         <Segment stacked>
             <Form.Input fluid icon='user' iconPosition='left' placeholder='First Name' onChange={(event) => {
@@ -59,7 +60,7 @@ function RegisterForm(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('the registration form state is - ',state);
+  console.log('the register state is - ',state);
   return {
     user: state,
   }
