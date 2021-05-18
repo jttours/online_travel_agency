@@ -36,4 +36,4 @@ function add(objModel, callback) {
 //  module.exports.getById = getById;
 //  module.exports.getOwned = getOwned;
 module.exports.getLoginCredentials = getLoginCredentials;
- module.exports.add = add;
+module.exports.add = add;
