@@ -7,11 +7,11 @@ const userRepository = require('./../repositories/user.repository');
 const router = express.Router();
 
 router.post('/', function (req, res) {
-   console.log('the request body in the login auth ctrl is - ',req.body);
+   //console.log('the request body in the login auth ctrl is - ',req.body);
    const { userName, userPassword } = req.body.loginState;
-   console.log('username - ',userName,'password - ',userPassword);
+   //console.log('username - ',userName,'password - ',userPassword);
    userRepository.getLoginCredentials(userName, userPassword, function (err, userVerified) {
-      console.log('the verified user deetails are - ',userVerified);
+      //console.log('the verified user deetails are - ',userVerified);
       const { ota_user_id, ota_user_first_name,ota_user_last_name,ota_user_username,ota_user_role } = userVerified;
       if (userVerified) {
          const token = jwt.sign({

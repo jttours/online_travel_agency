@@ -18,6 +18,12 @@ function performSelect(query, values, callback) {
        callback(err, results);
     });
  }
+
+ function performSelectAll(query, callback) {
+   connection.query(query, function (err, results) {
+      callback(err, results);
+   });
+}
  
  function performInsert(query, values, callback) {
     connection.query(query, values, function (err, results) {
@@ -41,6 +47,7 @@ function performSelect(query, values, callback) {
  
  module.exports = {
     performSelect,
+    performSelectAll,
     performInsert,
     performUpdate,
     performDelete,
