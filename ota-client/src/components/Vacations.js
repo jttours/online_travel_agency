@@ -12,16 +12,7 @@ function Vacations(state) {
 },[])
 
 
-// {teamList.map((val)=>{
-//   return (
-//   <div key={val.team_id} className="card">
-//       <h1>Team ID: {val.team_id}</h1> 
-//       <h1> Team Name: {val.team_name}</h1>
-//       <button onClick={()=>{selectTeam(val.team_id)}}>Show meetings</button>
-  
-      
-//   </div>);
-// })}
+
 
 
     return (

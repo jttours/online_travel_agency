@@ -27,9 +27,12 @@ process.env.SECRET_KEY = 'omar';
 
 
 app.use(cors());
-app.use(express.json());
-app.use(expressFileupload());
-app.use(multer({dest:'./uploads/'}).single('image'));
+//app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
+//app.use(expressFileupload());
+//app.use(multer({dest:'./uploads/'}).single('image'));
 
 app.use(express.static('./uploads'));
 app.use(express.static('./client'));
@@ -59,8 +62,8 @@ const authorizationAttribute = require('./attributes/authorization.attr');
 let fileName;
 let theRequestBody;
 app.post('/api/vacation', function (req, res) {
-  console.log("1 - ",req.body);
-  
+  console.log(req.body);
+  return res.send();
   if (req.files && req.files.image) {
     fileName = `${Date.now()}-${req.files.image.name}`;
 

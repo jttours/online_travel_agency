@@ -49,41 +49,33 @@ function AdminPage(state, props) {
 
     const onSubmit=(e) => {
       e.preventDefault();
-      const formData = new FormData();
+      const formData = new FormData(e.target);
       console.log('trying to submit -',vacationDestination,vacationImage,vacationDepartureDate,vacationReturnDate,vacationPrice,vacationDescription);
-      formData.append("destination", vacationDestination);
-      formData.append("image", vacationImage);
-      formData.append("departureDate",vacationDepartureDate);
-      formData.append("returnDate",vacationReturnDate);
-      formData.append("price",vacationPrice);
-      formData.append("description",vacationDescription);
-      console.log('form data is - ',Object.fromEntries(formData))
-      const data = Object.fromEntries(formData);
+
 
       fetch(`${serverURL}/api/vacation`, {
          method: 'POST',
          body: formData,
-        //  headers: {
-        //    'Accept': 'multipart/form-data',
-        //  }
       }).then(r => console.log(r));
 
-      axios
-          .post(`${serverURL}/api/vacation`, (data))
+      /*axios
+          .post(`${serverURL}/api/vacation`, (formData))
           .then((res) => {
+
+      setVacationDestination("");
+      setVacationImage("");
+        setVacationDepartureDate("");
+        setVacationReturnDate("");
+        setVacationPrice("");
+        setVacationDescription("");  
+         
           console.log("File Upload success",res);
           })
-          .catch((err) => console.log("File Upload ERROR",err));
+          .catch((err) => console.log("File Upload ERROR",err));*/
 
                   
       }
 
-      // setVacationDestination("");
-      //     setVacationImage("");
-      //     setVacationDepartureDate("");
-      //     setVacationReturnDate("");
-      //     setVacationPrice("");
-      //     setVacationDescription("");  
     
     
 
