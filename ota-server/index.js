@@ -6,6 +6,7 @@ const mysql = require('mysql');
 //const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
+// var upload = multer({dest:'uploads/'});
 const path = require('path');
 //const db = require('./db/db');
 
@@ -27,7 +28,7 @@ process.env.SECRET_KEY = 'omar';
 
 
 app.use(cors());
-//app.use(express.json());
+app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
@@ -44,6 +45,15 @@ const userCredentials = require('./attributes/user-credentials.attr');
 const quriesAttributes = require('./attributes/query.attribute');
 const authorizationAttribute = require('./attributes/authorization.attr');
 
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+      cb(null, './');
+   },
+  filename: function (req, file, cb) {
+      const ext = file.mimetype.split("/")[1];
+      cb(null , `uploads/${file.originalname}-{Date.now()}.${ext}`);
+  }
+});
 
 // storage variable, that leads to the map where images are stored (destination) and a filename
 
@@ -56,35 +66,31 @@ const authorizationAttribute = require('./attributes/authorization.attr');
 //     callback(null,`uploads/${file.originalname}-{Date.now()}.${ext}`);
 //   }
 // });
-// const upload = multer({
-//   storage: storage
-// })
-let fileName;
-let theRequestBody;
-app.post('/api/vacation', function (req, res) {
-  console.log(req.body);
-  return res.send();
-  if (req.files && req.files.image) {
-    fileName = `${Date.now()}-${req.files.image.name}`;
+const upload = multer({
+  storage: storage
+})
 
-     req.files['image'].mv(__dirname + `/uploads/${fileName}`, function (err) {
-        if (err) {
-           return res.status(500).send();
-        }
-        //res.send();
-     });
-  } else if (!req.files) {
-    theRequestBody=req.body;
-    //console.log('the request body is - ',req.body);
-  }
-  else {
-     res.status(500).send();
-  }
-  if (theRequestBody && fileName) {
-    console.log ("this is the console.log - ",fileName,theRequestBody.destination);
-    // const [destination,departureDate,returnDate,price,description] = theRequestBody;
+
+
+
+app.post("/api/vacation",upload.single('image'),(req, res, err) => {
+  console.log('1',req.file,req.body);
+  // if (!req.file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+  //   res.send({ msg:'Only image files (jpg, jpeg, png) are allowed!'})
+  // } else {
+    const image = req.file.filename;
+    //console.log('the vacation req body is - ',req.body);
+    
+    const obj = JSON.parse(JSON.stringify(req.body));
+    //console.log(obj);
+    
+    //const [destination,departureDate,returnDate,price,description] = obj;
+
+    console.log(obj.destination,image,obj.departureDate,obj.returnDate,obj.price,obj.description);
+
     const sqlInsert = "INSERT INTO `ota_vacations` (`ota_vacation_destination`, `ota_vacation_image_url`, `ota_vacation_departure_date`,`ota_vacation_return_date`,`ota_vacation_price`,`ota_vacation_description`) VALUES (?,?,?,?,?,?);"
-        connection.query(sqlInsert,[theRequestBody.destination,fileName,theRequestBody.departureDate,theRequestBody.returnDate,theRequestBody.price,theRequestBody.description], (err,result)=> {
+    
+    connection.query(sqlInsert,[obj.destination,image,obj.departureDate,obj.returnDate,obj.price,obj.description], (err,result)=> {
       if (err) {
         console.log(err);
         res.send({
@@ -98,37 +104,8 @@ app.post('/api/vacation', function (req, res) {
         });
       }
     });   
-  }
-})
-
-
-// app.post("/api/vacation",upload.single('image'),(req, res, err) => {
-//   console.log('1',req.file,req.body);
-//   // if (!req.file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
-//   //   res.send({ msg:'Only image files (jpg, jpeg, png) are allowed!'})
-//   // } else {
-//     const image = req.file.image;
-//     //console.log('the vacation req body is - ',req.body);
-//     const [destination,departureDate,returnDate,price,description] = req.body;
-
-//     const sqlInsert = "INSERT INTO `ota_vacations` (`ota_vacation_destination`, `ota_vacation_image_url`, `ota_vacation_departure_date`,`ota_vacation_return_date`,`ota_vacation_price`,`ota_vacation_description`) VALUES (?,?,?,?,?,?);"
-    
-//     connection.query(sqlInsert,[destination,image,departureDate,returnDate,price,description], (err,result)=> {
-//       if (err) {
-//         console.log(err);
-//         res.send({
-//           msg:err
-//         })
-//       }
-//       if (result) {
-//         res.send({
-//           data: result,
-//           msg: 'vacation has been added to data base!'
-//         });
-//       }
-//     });   
-//   // }
-// });
+  // }
+});
 
 
 

@@ -50,13 +50,19 @@ function AdminPage(state, props) {
     const onSubmit=(e) => {
       e.preventDefault();
       const formData = new FormData(e.target);
+      formData.append('destination', vacationDestination);
       console.log('trying to submit -',vacationDestination,vacationImage,vacationDepartureDate,vacationReturnDate,vacationPrice,vacationDescription);
 
 
       fetch(`${serverURL}/api/vacation`, {
          method: 'POST',
-         body: formData,
+         body: formData, vacationDestination
       }).then(r => console.log(r));
+        setVacationDestination("");
+        setVacationImage("");
+        setVacationDepartureDate("");
+        setVacationReturnDate("");
+        setVacationPrice("");
 
       /*axios
           .post(`${serverURL}/api/vacation`, (formData))

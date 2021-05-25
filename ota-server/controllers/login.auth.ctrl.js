@@ -7,7 +7,7 @@ const userRepository = require('./../repositories/user.repository');
 const router = express.Router();
 
 router.post('/', function (req, res) {
-   //console.log('the request body in the login auth ctrl is - ',req.body);
+   console.log('the request body in the login auth ctrl is - ',req.body);
    const { userName, userPassword } = req.body.loginState;
    //console.log('username - ',userName,'password - ',userPassword);
    userRepository.getLoginCredentials(userName, userPassword, function (err, userVerified) {
