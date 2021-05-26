@@ -35,8 +35,9 @@ app.use(express.urlencoded({
 //app.use(expressFileupload());
 //app.use(multer({dest:'./uploads/'}).single('image'));
 
-app.use(express.static('./uploads'));
+
 app.use(express.static('./client'));
+app.use(express.static(__dirname + '/'));
 
 
 
@@ -51,7 +52,7 @@ var storage = multer.diskStorage({
    },
   filename: function (req, file, cb) {
       const ext = file.mimetype.split("/")[1];
-      cb(null , `uploads/${file.originalname}-{Date.now()}.${ext}`);
+      cb(null , `uploads/${file.originalname}-${Date.now()}.${ext}`);
   }
 });
 

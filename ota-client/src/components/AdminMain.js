@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { connect } from 'react-redux';
 import { Card, Icon, Image } from 'semantic-ui-react'
 
-function Vacations(state) {
+function AdminMain(state) {
 
   const [vacationsList,setVacationsList] = useState([]);
 
@@ -64,4 +64,4 @@ const mapStateToProps = (state) => {
     }
   }
 
-export default connect(mapStateToProps)(Vacations);
+export default connect(mapStateToProps)(AdminMain);

@@ -35,7 +35,7 @@ const countryOptions = [
 
 
 
-function AdminPage(state, props) {
+function AdminAddVacation(state, props) {
 
   const serverURL = 'http://localhost:6789';
     // const {addVacation} = props;
@@ -175,4 +175,4 @@ const mapStateToProps = (state) => {
     }
   }
 
-export default connect(mapStateToProps)(AdminPage);
+export default connect(mapStateToProps)(AdminAddVacation);
