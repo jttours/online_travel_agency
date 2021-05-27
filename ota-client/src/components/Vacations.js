@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react';
 import Axios from 'axios';
 import { connect } from 'react-redux';
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
 function Vacations(state) {
 
@@ -25,10 +25,13 @@ function Vacations(state) {
                 
                 <Card key={v.ota_vacation_id}>
               <Card.Content extra>
-                <a>
-                  <Icon name='user' />
-                  10 followers
+              <a>
+                <Icon name='star outline'/>
+                10 followers
                 </a>
+                <Button basic color='teal'>
+                  Teal
+                </Button>
               </Card.Content>
               <Card.Content>
                 <Card.Header>{v.ota_vacation_destination}</Card.Header>

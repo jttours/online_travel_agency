@@ -9,7 +9,8 @@ import {
   import RegisterForm from "./RegisterForm";
   import Vacations from "./Vacations";
   import UserNotFound from "./UserNotFound";
-  import AdminMain from './AdminAddVacation';
+  import AdminMain from './AdminMain';
+  import AdminAddVacation from './AdminAddVacation';
 
 
 function Routes(props) {
@@ -24,6 +25,9 @@ function Routes(props) {
       </Route>
       <Route path="/admin">
         <AdminMain />
+      </Route>
+      <Route path="/addVacation">
+        <AdminAddVacation />
       </Route>
       <Route path="/vacations">
         <Vacations />

@@ -36,7 +36,14 @@ export const loginUser = (loginState,history) => {
         try {
             const res = await axios.post(`${serverURL}/login`,{
                 loginState
-            });
+            }
+            ,{
+                headers: {
+                'Content-type': 'application/json',
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+             }
+            },
+            );
             console.log('the login response is - ', res);
             const { data } = res;
             //window.localStorage.setItem('token', data);

@@ -134,6 +134,17 @@ app.get('/api/vacations', (req,res)=>{
   });
 })
 
+app.delete('/api/deleteVacation/:id', (req,res)=>{
+  //console.log(req.params);
+  const vacationToDeleteId = req.params.id;
+  const sqlDeleteVacation = "DELETE FROM ota_vacations WHERE ota_vacation_id = ?";
+  connection.query(sqlDeleteVacation, vacationToDeleteId, (err,result)=> {
+    console.log(result);
+    res.send(result);
+});
+
+})
+
 app.use('/register', ...middlewares, registerAuthCtrl);
 app.use('/login', ...middlewares, loginAuthCtrl);
 //app.use('/api/vacations',...middlewares, vacationCtrl);

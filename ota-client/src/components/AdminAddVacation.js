@@ -58,6 +58,7 @@ function AdminAddVacation(state, props) {
          method: 'POST',
          body: formData, vacationDestination
       }).then(r => console.log(r));
+
         setVacationDestination("");
         setVacationImage("");
         setVacationDepartureDate("");
@@ -78,7 +79,8 @@ function AdminAddVacation(state, props) {
           console.log("File Upload success",res);
           })
           .catch((err) => console.log("File Upload ERROR",err));*/
-
+          
+          history.push("./admin");
                   
       }
 
